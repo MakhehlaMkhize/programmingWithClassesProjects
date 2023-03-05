@@ -4,25 +4,47 @@ using System.IO;
 class Program
 {
     static void Main(string[] args)
-    {
-        Console.WriteLine("1. Write \n2. Display \n3. Load \n4. Save \n5. Quit \nWhat would you like to do?");
-        Console.Write("Create a file name: ");
-
-        FileHandling journalEntry = new FileHandling();
-        journalEntry._userFileNameInput = Console.ReadLine();
-        journalEntry._userJournalEntry = Console.ReadLine();
-        journalEntry.WriteOnFile();
-
-        string[] lines = System.IO.File.ReadAllLines(journalEntry._userFileNameInput);
-
-        foreach (string line in lines)
-        {
-            string[] entry = line.Split("~|");;
-            foreach(string i in entry)
-            {
-                Console.WriteLine(i);
-            }
-        }
+    {   
         
+
+        bool displayOptions = true;
+         while(displayOptions){
+            Console.WriteLine("1. Write\n2. Display\n3. Save\n4. Load\n5. Quit");
+            Console.WriteLine("Choose action required");
+            string actionRequired = Console.ReadLine();
+
+            FileHandling write = new FileHandling();
+            {
+                if(actionRequired == "1")
+                {            
+                    write.NewEntry();
+                }
+                else if ( actionRequired == "2")
+                {
+                    write.ReadFile();
+                }
+                else if ( actionRequired == "3")
+                {   
+                   write.RenameFileName();
+                }
+                else if ( actionRequired == "4")
+                {
+                    write.LoadFile();
+                }
+                else if(actionRequired == "5"){
+                    displayOptions = false;
+                }
+                else
+                {
+                    Console.WriteLine("Incorrect input! Please type a number between 1-5");
+                }
+            }
+         }
+         
+         
+         
+        
+
+       
     }
 }
